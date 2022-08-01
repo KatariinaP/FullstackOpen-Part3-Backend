@@ -84,12 +84,12 @@ app.delete('/api/persons/:id', (request, response, next) => {
   .catch(error => next(error))
 })
 
-app.put('/api/notes/:id', (request, response, next) => {
+app.put('/api/persons/:id', (request, response, next) => {
   const body = request.body
 
   const contact = {
-    content: body.name,
-    important: body.number,
+    name: body.name,
+    number: body.number,
   }
 
   Contact.findByIdAndUpdate(request.params.id, contact, { new: true })
