@@ -58,9 +58,11 @@ app.get('/api/persons', (request, response) => {
   })
 })
 
-app.get('/info', (req, res) => {
+app.get('/api/info', (request, response) => {
   const date = new Date()
-  res.send(`<h1>Phonebook has info for ${persons.length} people <p>${date}</p> </h1>`)
+  Contact.find({}).then(people => {
+    response.json(`Phonebook has info for ${people.length} people ${date}`)
+  })
 })
 
 app.get('/api/persons/:id', (request, response, next) => {
@@ -73,8 +75,6 @@ app.get('/api/persons/:id', (request, response, next) => {
   })
   .catch(error => next(error))
 })
-
-
 
 app.delete('/api/persons/:id', (request, response, next) => {
   Contact.findByIdAndRemove(request.params.id)
