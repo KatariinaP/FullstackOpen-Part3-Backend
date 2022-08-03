@@ -21,21 +21,21 @@ const Contact = mongoose.model('contact', contactSchema)
 
 
 if (process.argv.length===5){
-const newName = process.argv[3]
-const newNumber = process.argv[4]
-const contact = new Contact({
+  const newName = process.argv[3]
+  const newNumber = process.argv[4]
+  const contact = new Contact({
     name: newName,
     number: newNumber
-})
-contact.save().then(result => {
-  console.log(`added ${result.name} number ${result.number} to phonebook`)
-  mongoose.connection.close()
-}) 
+  })
+  contact.save().then(result => {
+    console.log(`added ${result.name} number ${result.number} to phonebook`)
+    mongoose.connection.close()
+  })
 }
 
-if(process.argv.length===3){
-console.log(`phonebook:`)
-Contact.find({}).then(result => {
+if( process.argv.length === 3 ){
+  console.log('phonebook:')
+  Contact.find({}).then(result => {
     result.forEach(contact => {
       console.log(`${contact.name} ${contact.number}`)
     })

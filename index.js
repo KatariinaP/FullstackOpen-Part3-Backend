@@ -39,7 +39,7 @@ app.post('/api/persons', (request, response, next) => {
   newContact.save().then(savedContact => {
     response.json(savedContact)
   })
-  .catch(error => next(error))
+    .catch(error => next(error))
 })
 
 app.get('/api/persons', (request, response) => {
@@ -63,23 +63,23 @@ app.get('/api/persons/:id', (request, response, next) => {
       response.status(404).end()
     } 
   })
-  .catch(error => next(error))
+    .catch(error => next(error))
 })
 
 app.delete('/api/persons/:id', (request, response, next) => {
   Contact.findByIdAndRemove(request.params.id)
-  .then(result => {
-    response.status(204).end()
-  })
-  .catch(error => next(error))
+    .then(result => {
+      response.status(204).end()
+    })
+    .catch(error => next(error))
 })
 
 app.put('/api/persons/:id', (request, response, next) => {
   const { name, number } = request.body
 
   Contact.findByIdAndUpdate(
-    request.params.id, 
-    { name, number }, 
+    request.params.id,
+    { name, number },
     { new: true, runValidators: true, context: 'query' })
     .then(updatedContact => {
       response.json(updatedContact)
